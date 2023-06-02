@@ -1,7 +1,8 @@
 import secure
 import uvicorn
 from config import settings
-from fastapi import FastAPI
+from dependencies import validate_token
+from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -51,12 +52,12 @@ def public():
     return {"text": "This is a public message."}
 
 
-@app.get("/api/messages/protected")
+@app.get("/api/messages/protected", dependencies=[Depends(validate_token)])
 def protected():
     return {"text": "This is a protected message."}
 
 
-@app.get("/api/messages/admin")
+@app.get("/api/messages/admin", dependencies=[Depends(validate_token)])
 def admin():
     return {"text": "This is an admin message."}
 
