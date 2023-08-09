@@ -5,7 +5,7 @@ from fastapi import Depends
 from json_web_token import JsonWebToken
 
 
-def validate_token(token: str = Depends(get_bearer_token)):
+def validate_token(token: str = Depends(get_bearer_token)) -> Dict[str, Any]:
     return JsonWebToken(token).validate()
 
 
