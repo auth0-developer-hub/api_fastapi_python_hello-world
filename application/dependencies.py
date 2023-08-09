@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from authorization_header_elements import get_bearer_token
 from custom_exceptions import PermissionDeniedException
 from fastapi import Depends
@@ -12,7 +13,7 @@ class PermissionsValidator:
     def __init__(self, required_permissions: list[str]):
         self.required_permissions = required_permissions
 
-    def __call__(self, token: str = Depends(validate_token)):
+    def __call__(self, token: Dict[str, Any] = Depends(validate_token)):
         token_permissions = token.get("permissions")
         token_permissions_set = set(token_permissions)
         required_permissions_set = set(self.required_permissions)
