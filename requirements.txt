@@ -6,7 +6,7 @@ cryptography==41.0.0
 fastapi==0.95.2
 flake8==6.0.0
 h11==0.13.0
-idna==3.4
+idna==3.15
 isort==5.11.4
 pre-commit==2.21.0
 pycparser==2.21
